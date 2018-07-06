@@ -1,0 +1,6 @@
+* {
+    font-family: courier, verdana;
+    font-weight: 600;
+    --themecolor: rgba(128, 128, 128, .5);
+    background: var(--themecolor);
+}

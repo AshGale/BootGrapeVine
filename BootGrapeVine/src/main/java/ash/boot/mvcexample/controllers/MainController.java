@@ -75,4 +75,5 @@ public class MainController {
     	return "ajaxCSRF";
     	//return "ajaxIndex";//seemed to need to have csrf
     }
+    
 }

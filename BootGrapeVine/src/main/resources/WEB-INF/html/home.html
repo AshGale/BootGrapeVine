@@ -1,19 +1,29 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Getting Started: Serving Web Content</title>
+<title>Home</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="../css/themes/theme.css" rel="stylesheet">
+<!-- <div th:fragment="header-css"> -->
+<!-- 	<link th:href="@{/css/themes/theme.css}" rel="stylesheet" -->
+<!-- 		type="text/css" /> -->
+
+<!-- </div> -->
 </head>
 <body>
 	<a href="/home">Home</a>
 	<a href="/greet">Public</a>
 	<a href="/ajax">Ajax</a>
 	<a href="/securityHome">Security</a>
-	<br> signed in as: [[${#httpServletRequest.remoteUser}]]
-	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Sign Out" />
-	</form>
+	<br>
 	<span
 		th:text="'Today is: ' + ${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></span>
+	<br>
+	<span sec:authorize="isAuthenticated()"> | [[${#httpServletRequest.remoteUser}]] Logged-In
+		<span sec:authentication="name"></span>
+		| Roles: <span sec:authentication="principal.authorities"></span> | <a
+		th:href="@{/logout}">Sign Out</a>
+	</span>
+
 </body>
 </html>
