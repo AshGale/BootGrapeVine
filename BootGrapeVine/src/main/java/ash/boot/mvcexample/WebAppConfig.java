@@ -1,7 +1,5 @@
 package ash.boot.mvcexample;
 
-import java.util.Set;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
 @EnableWebMvc
@@ -24,7 +21,7 @@ public class WebAppConfig implements  WebMvcConfigurer {
 	@Bean
     @Description("Thymeleaf template resolver serving HTML 5")
     public ClassLoaderTemplateResolver templateResolver() {
-        
+        //bean required to use Thymeleaf and it's perks, eg auto csrf
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         
         templateResolver.setPrefix("WEB-INF/html/");
@@ -38,6 +35,7 @@ public class WebAppConfig implements  WebMvcConfigurer {
 	
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		//used to make these files available for use when called in html header
         registry.addResourceHandler(
                 "/webjars/**",
                 "/img/**",
@@ -53,7 +51,7 @@ public class WebAppConfig implements  WebMvcConfigurer {
     @Bean
     @Description("Thymeleaf template engine with Spring integration")
     public SpringTemplateEngine templateEngine() {
-        
+    	
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
 
@@ -74,14 +72,11 @@ public class WebAppConfig implements  WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("home");
-        registry.addViewController("/home").setViewName("home");
-        registry.addViewController("/ajaxCSRF").setViewName("ajaxCSRF");
-       // registry.addViewController("/home").setViewName("home");
-        registry.addViewController("/greet").setViewName("greet");
-        //registry.addViewController("/ajax").setViewName("ajaxIndex");
-        registry.addViewController("/securityHome").setViewName("securityHome");
-        registry.addViewController("/hello").setViewName("hello");
-        registry.addViewController("/login").setViewName("login");
+    	//Set mappings for View resolver
+        registry.addViewController("/").setViewName("/navigations/home");
+        registry.addViewController("/home").setViewName("/navigations/home");
+        registry.addViewController("/securityHome").setViewName("/security/securityHome");
+        registry.addViewController("/hello").setViewName("/security/hello");
+        registry.addViewController("/login").setViewName("/security/login");
     }
 }
