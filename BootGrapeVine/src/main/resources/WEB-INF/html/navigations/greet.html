@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>greet?name=""</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -9,6 +9,7 @@
 	<a href="/greet">Public</a>
 	<a href="/ajax">Ajax</a>
 	<a href="/securityHome">Security</a><br>
+	<p th:if="${param.name}">I see you</p>
     <p th:text="'Hello, ' + ${name} + '!'" />
 </body>
 </html>

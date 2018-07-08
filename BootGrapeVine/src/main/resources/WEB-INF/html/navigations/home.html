@@ -9,7 +9,7 @@
 <!-- 		type="text/css" /> -->
 
 <!-- </div> -->
-</head>
+</head >
 <body>
 	<a href="/home">Home</a>
 	<a href="/greet">Public</a>
@@ -24,6 +24,16 @@
 		| Roles: <span sec:authentication="principal.authorities"></span> | <a
 		th:href="@{/logout}">Sign Out</a>
 	</span>
+<!-- 	<div sec:authorize="isAuthenticated()"> -->
+<!-- 		This content is only shown to authenticated users. -->
+<!-- 	</div> -->
+<!-- 	<div sec:authorize="hasRole('ROLE_ADMIN')"> -->
+<!-- 		Tis contnet is only shown to administrators -->
+<!-- 	</div> -->
+<!-- 	<div sec:authorize="hasRole('ROLE_USER')"> -->
+<!-- 		This contnet is only shown to users. -->
+<!-- 	</div> -->
+	
 
 </body>
 </html>
